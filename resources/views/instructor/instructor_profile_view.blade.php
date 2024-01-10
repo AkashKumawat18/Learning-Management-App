@@ -1,5 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('instructor.instructor_dashboard')
+@section('instructor')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <div class="page-content">
     <!--breadcrumb-->
@@ -27,11 +27,11 @@
                     
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{(!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                <img src="{{(!empty($profileData->photo)) ? url('upload/instructor_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                                 <div class="mt-3">
                                     <h4>{{$profileData->name}}</h4>
                                     <p class="text-secondary mb-1">{{$profileData->username }}</p>
-                                    <p class="text-muted font-size-sm">{{$profileData->phone}}</p>
+                                    <p class="text-muted font-size-sm">{{$profileData->address }}</p>
                                     <button class="btn btn-primary">Follow</button>
                                     <button class="btn btn-outline-primary">Message</button>
                                 </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="card">
-                        <form method="POST" action="{{ route('admin.profile.store') }}"  enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('instructor.profile.store') }}"  enctype="multipart/form-data">
                             @csrf
                         <div class="card-body">
                             <div class="row mb-3">
@@ -106,7 +106,7 @@
                                     <h6 class="mb-0"></h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <img id="showImage" src="{{(!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="90">
+                                    <img id="showImage" src="{{(!empty($profileData->photo)) ? url('upload/instructor_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="90">
                                 </div>
                             </div>
                             <div class="row">
