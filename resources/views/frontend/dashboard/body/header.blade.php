@@ -140,8 +140,8 @@
                                                             <img class="rounded-full img-fluid" src="{{ (!empty($profileData->photo)) ? url('upload/user_images/'.$profileData->photo) : url('upload/no_image.jpg')}}" alt="Avatar image">
                                                         </a>
                                                         <div class="ml-2">
-                                                            <h4><a href="teacher-detail.html" class="text-black">Alex Smith</a></h4>
-                                                            <span class="d-block fs-14 lh-20">alexsmith@example.com</span>
+                                                            <h4><a href="teacher-detail.html" class="text-black">{{$profileData->name}}</a></h4>
+                                                            <span class="d-block fs-14 lh-20">{{$profileData->email}}</span>
                                                         </div>
                                                     </li>
                                                     <li>
@@ -199,7 +199,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="index.html">
+                                                                <a href="{{route('user.logout')}}">
                                                                     <i class="la la-power-off mr-1"></i> Logout
                                                                 </a>
                                                             </li>
