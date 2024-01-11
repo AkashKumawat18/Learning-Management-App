@@ -199,7 +199,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{route('user.logout')}}">
+                                                                <a href="#">
                                                                     <i class="la la-power-off mr-1"></i> Logout
                                                                 </a>
                                                             </li>
