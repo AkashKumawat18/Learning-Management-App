@@ -47,8 +47,11 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
     //Category all route
     Route::controller(CategoryController::class)->group(function(){
-        Route::get('all/category',AllCategory)->name('all.category');
+        Route::get('/all/category','AllCategory')->name('all.category');
+    
+    
     });
+
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
