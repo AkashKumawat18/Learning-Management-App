@@ -97,6 +97,7 @@ Route::middleware(['auth','roles:instructor'])->group(function () {
     // Instructor All Route 
 Route::controller(CourseController::class)->group(function(){
     Route::get('/all/course','AllCourse')->name('all.course');
+    Route::get('/add/course','AddCourse')->name('add.course');
 
 });
 }); 
