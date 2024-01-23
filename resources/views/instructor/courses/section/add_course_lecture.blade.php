@@ -126,8 +126,17 @@
         const newLectureDiv = document.createElement('div');
         newLectureDiv.classList.add('lectureDiv','mb-3');
         newLectureDiv.innerHTML = `
-        
-        `;
+        <div class="container">
+    <h6>Lecture Title </h6>
+    <input type="text" class="form-control" placeholder="Enter Lecture Title">
+    <textarea class="form-control mt-2" placeholder="Enter Lecture Content"  ></textarea>
+    <h6 class="mt-3">Add Video Url</h6>
+    <input type="text" name="url" class="form-control" placeholder="Add URL">
+    <button class="btn btn-primary mt-3" onclick="" >Save Lecture</button>
+    <button class="btn btn-secondary mt-3" onclick="">Cancel</button>
+</div> 
+     `;
+     lectureContainer.appendChild(newLectureDiv);
     }
 </script>
 @endsection
