@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Backend;
 use Carbon\Carbon;
 use App\Models\Course;
 use App\Models\Category;
-use App\Models\SubCategory;
 use App\Models\Course_goal;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\CourseSection;
+use App\Models\CourseLecture;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -256,6 +258,23 @@ class CourseController extends Controller
         $course = Course::find($id);
 
         return view('instructor.courses.section.add_course_lecture',compact('course'));
+
+    }// End Method 
+
+    public function AddCourseSection(Request $request){
+
+        $cid = $request->id;
+
+        CourseSection::insert([
+            'course_id' => $cid,
+            'section_title' => $request->section_title, 
+        ]);
+
+        $notification = array(
+            'message' => 'Course Section Added Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);  
 
     }// End Method 
 }
