@@ -58,17 +58,17 @@
 
                           <div class="courseHide" id="lectureContainer{{ $key }}">
                             <div class="container">
+                                @foreach ($item->lectures as $lecture) 
                                 <div class="lectureDiv mb-3 d-flex align-items-center justify-content-between">
                                     <div>
-                                        <strong>lecture title asdfsdafasfdsf</strong>
+                                        <strong> {{ $loop->iteration }}. {{ $lecture->lecture_title }}</strong>
                                     </div>
             
                                     <div class="btn-group">
-                      <a href="" class="btn btn-sm btn-primary">Edit</a> &nbsp;
-                       <a href="" class="btn btn-sm btn-danger">Delete</a>
             
                                     </div> 
                                 </div> 
+                                @endforeach 
                             </div> 
                            </div>
             
