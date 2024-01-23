@@ -90,7 +90,7 @@
             var isChecked = $(this).is(':checked');
             // send an ajax request to update status 
             $.ajax({
-                url: "{{ route('update.user.status') }}",
+                url: "{{ route('update.user.stauts') }}",
                 method: "POST",
                 data: {
                     user_id : userId,
