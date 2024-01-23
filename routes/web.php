@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\CategoryController;
 
 /*
@@ -92,6 +93,12 @@ Route::middleware(['auth','roles:instructor'])->group(function () {
     Route::post('/instructor/profile/store', [InstructorController::class, 'InstructorProfileStore'])->name('instructor.profile.store');
     Route::get('/instructor/change/password', [InstructorController::class, 'InstructorChangePassword'])->name('instructor.change.password');
     Route::post('/instructor/password/update', [InstructorController::class, 'InstructorPasswordUpdate'])->name('instructor.password.update');
+
+    // Instructor All Route 
+Route::controller(CourseController::class)->group(function(){
+    Route::get('/all/course','AllCourse')->name('all.course');
+
+});
 }); 
 
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
