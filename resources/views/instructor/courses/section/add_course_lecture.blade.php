@@ -133,10 +133,15 @@
     <h6 class="mt-3">Add Video Url</h6>
     <input type="text" name="url" class="form-control" placeholder="Add URL">
     <button class="btn btn-primary mt-3" onclick="" >Save Lecture</button>
-    <button class="btn btn-secondary mt-3" onclick="">Cancel</button>
+    <button class="btn btn-secondary mt-3" onclick="hideLectureContainer('${containerId}')">Cancel</button>
 </div> 
      `;
      lectureContainer.appendChild(newLectureDiv);
+    }
+    function hideLectureContainer(containerId) {
+        const lectureContainer = document.getElementById(containerId);
+        lectureContainer.style.display = 'none';
+        location.reload();
     }
 </script>
 @endsection
