@@ -113,6 +113,7 @@ Route::controller(CourseController::class)->group(function(){
 Route::controller(CourseController::class)->group(function(){
     Route::get('/add/course/lecture/{id}','AddCourseLecture')->name('add.course.lecture');
     Route::post('/add/course/section/','AddCourseSection')->name('add.course.section');
+    Route::post('/save-lecture/','SaveLecture')->name('save-lecture');
 });
 }); 
 

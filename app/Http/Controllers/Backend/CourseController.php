@@ -279,4 +279,18 @@ class CourseController extends Controller
         return redirect()->back()->with($notification);  
 
     }// End Method 
+
+    public function SaveLecture(Request $request){
+
+        $lecture = new CourseLecture();
+        $lecture->course_id = $request->course_id;
+        $lecture->section_id = $request->section_id;
+        $lecture->lecture_title = $request->lecture_title;
+        $lecture->url = $request->lecture_url;
+        $lecture->content = $request->content;
+        $lecture->save();
+
+        return response()->json(['success' => 'Lecture Saved Successfully']);
+
+    }// End Method 
 }

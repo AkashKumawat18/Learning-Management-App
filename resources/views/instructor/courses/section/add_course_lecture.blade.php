@@ -132,7 +132,7 @@
     <textarea class="form-control mt-2" placeholder="Enter Lecture Content"  ></textarea>
     <h6 class="mt-3">Add Video Url</h6>
     <input type="text" name="url" class="form-control" placeholder="Add URL">
-    <button class="btn btn-primary mt-3" onclick="" >Save Lecture</button>
+    <button class="btn btn-primary mt-3" onclick="saveLecture('${courseId}',${sectionId},'${containerId}')" >Save Lecture</button>
     <button class="btn btn-secondary mt-3" onclick="hideLectureContainer('${containerId}')">Cancel</button>
 </div> 
      `;
@@ -142,6 +142,61 @@
         const lectureContainer = document.getElementById(containerId);
         lectureContainer.style.display = 'none';
         location.reload();
+    }
+</script>
+<script>
+    function saveLecture(courseId, sectionId, containerId){
+        const lectureContainer = document.getElementById(containerId);
+        const lectureTitle = lectureContainer.querySelector('input[type="text"]').value;
+        const lectureContent = lectureContainer.querySelector('textarea').value;
+        const lectureUrl = lectureContainer.querySelector('input[name="url"]').value;
+        fetch('/save-lecture', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+            body: JSON.stringify({
+                course_id: courseId,
+                section_id: sectionId,
+                lecture_title: lectureTitle,
+                lecture_url: lectureUrl,
+                content: lectureContent,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+
+            lectureContainer.style.display = 'none';
+            location.reload();
+               // Start Message 
+               const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success', 
+                  showConfirmButton: false,
+                  timer: 6000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    title: data.error, 
+                    })
+                }
+              // End Message  
+            
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 </script>
 @endsection
