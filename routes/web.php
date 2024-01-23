@@ -108,7 +108,15 @@ Route::controller(CourseController::class)->group(function(){
     Route::get('/delete/course/{id}','DeleteCourse')->name('delete.course');
 
 });
+
+// Course Section and Lecture All Route 
+Route::controller(CourseController::class)->group(function(){
+    Route::get('/add/course/lecture/{id}','AddCourseLecture')->name('add.course.lecture');
+
+
+});
 }); 
+
 
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 

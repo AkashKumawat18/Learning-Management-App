@@ -250,4 +250,12 @@ class CourseController extends Controller
         return redirect()->back()->with($notification); 
 
     }// End Method 
+
+    public function AddCourseLecture($id){
+
+        $course = Course::find($id);
+
+        return view('instructor.courses.section.add_course_lecture',compact('course'));
+
+    }// End Method 
 }
