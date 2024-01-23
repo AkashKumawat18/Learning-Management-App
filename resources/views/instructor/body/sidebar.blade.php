@@ -1,3 +1,9 @@
+@php
+  $id = Auth::user()->id;
+  $instructorId = App\Models\User::find($id);
+  $status = $instructorId->status;
+@endphp
+
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
@@ -19,6 +25,8 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+
+        @if ($status === '1')
 
         <li class="menu-label">UI Elements</li>
        
@@ -80,7 +88,12 @@
                 </li>
             </ul>
         </li>
+
+        @else
+
+        @endif
         <li>
+   
             <a href="https://themeforest.net/user/codervent" target="_blank">
                 <div class="parent-icon"><i class="bx bx-support"></i>
                 </div>
