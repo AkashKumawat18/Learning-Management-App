@@ -22,6 +22,8 @@
 
                     <div class="d-flex align-items-center">
 
+
+
                         <img src="{{ asset($course->course_image) }}" class="rounded-circle p-1 border" width="90" height="90" alt="...">
 
                         <div class="flex-grow-1 ms-3">
@@ -47,7 +49,12 @@
   
            <div class="d-flex justify-content-between align-items-center">
   
-          <button type="submit" class="btn btn-danger px-2 ms-auto"> Delete Section</button> &nbsp;
+                  <form action="{{ route('delete.section', ['id' => $item->id]) }}" method="POST">
+            @csrf
+
+        <button type="submit" class="btn btn-danger px-2 ms-auto"> Delete Section</button> &nbsp;
+
+       </form>
   
   
           <a class="btn btn-primary" onclick="addLectureDiv({{ $course->id }}, {{ $item->id }}, 'lectureContainer{{ $key }}' )" id="addLectureBtn($key)"> Add Lecture </a>
@@ -66,7 +73,7 @@
             
                                     <div class="btn-group">
                                         <a href="{{ route('edit.lecture',['id' => $lecture->id]) }}" class="btn btn-sm btn-primary">Edit</a> &nbsp;
-                                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="{{ route('delete.lecture',['id' => $lecture->id]) }}" class="btn btn-sm btn-danger" id="delete">Delete</a>
                                     </div> 
                                 </div> 
                                 @endforeach 

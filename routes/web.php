@@ -116,6 +116,8 @@ Route::controller(CourseController::class)->group(function(){
     Route::post('/save-lecture/','SaveLecture')->name('save-lecture');
     Route::get('/edit/lecture/{id}','EditLecture')->name('edit.lecture');
     Route::post('/update/course/lecture','UpdateCourseLecture')->name('update.course.lecture');
+    Route::get('/delete/lecture/{id}','DeleteLecture')->name('delete.lecture');
+    Route::post('/delete/section/{id}','DeleteSection')->name('delete.section');
 });
 }); 
 
