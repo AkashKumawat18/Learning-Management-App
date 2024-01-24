@@ -43,8 +43,7 @@ Route::controller(WishListController::class)->group(function(){
     Route::get('/user/wishlist','AllWishlist')->name('user.wishlist');
     Route::get('/get-wishlist-course/','GetWishlistCourse');
     Route::get('/wishlist-remove/{id}','RemoveWishlist');
-    Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
-    Route::get('/cart/data/', [CartController::class, 'CartData']);
+   
 
 
 });
@@ -151,6 +150,11 @@ Route::get('/subcategory/{id}/{slug}', [IndexController::class, 'SubCategoryCour
 Route::get('/instructor/details/{id}', [IndexController::class, 'InstructorDetails'])->name('instructor.details');
 
 Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'AddToWishList']);
+
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+Route::get('/cart/data/', [CartController::class, 'CartData']);
+// Get Data from Minicart 
+Route::get('/course/mini/cart/', [CartController::class, 'AddMiniCart']);
 
 
 ///// End Route Accessable for All 
