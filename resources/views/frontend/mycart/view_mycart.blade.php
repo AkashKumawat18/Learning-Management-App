@@ -41,7 +41,13 @@
                 
                 </tbody>
             </table>
-            <div class="d-flex flex-wrap align-items-center justify-content-between pt-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between pt-4"> 
+
+                @if(Session::has('coupon'))
+
+                @else 
+
+                    {{-- {{ json_encode(Session::get('coupon'), JSON_PRETTY_PRINT) }} --}} 
 
                 <form  action="#">
                     <div class="input-group mb-2" id="couponField">
@@ -51,6 +57,7 @@
                         </div>
                     </div>
                 </form>
+                @endif
 
             </div>
         </div>
