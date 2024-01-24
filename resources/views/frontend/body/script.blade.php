@@ -176,6 +176,8 @@
             url: '/course/mini/cart',
             dataType: 'json',
             success:function(response){
+                $('span[id="cartSubTotal"]').text(response.cartTotal);
+                $('#cartQty').text(response.cartQty);
                 var miniCart = ""
                 $.each(response.carts, function(key,value){
                     miniCart += `<li class="media media-card">
@@ -183,7 +185,7 @@
                                 <img src="/${value.options.image}" alt="Cart image">
                             </a>
                             <div class="media-body">
-                                <h5><a href="course-details.html"> ${value.name}</a></h5>
+                                <h5><a href="/course/details/${value.id}/${value.options.slug}"> ${value.name}</a></h5>
                                   
                                  <span class="d-block fs-14">$${value.price}</span> 
                             </div>
