@@ -128,7 +128,42 @@
     {{-- /// Start Add To Cart  // --}}
     <script type="text/javascript">
         function addToCart(courseId, courseName, instructorId, slug){
-         
-        }
-     </script>
-          {{-- /// End Add To Cart  // --}}
+            $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {
+                _token: '{{ csrf_token() }}',
+                course_name: courseName,
+                course_name_slug: slug,
+                instructor: instructorId
+            },
+            url: "/cart/data/store/"+ courseId,
+            success: function(data) {
+                 // Start Message 
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 6000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success', 
+                    icon: 'success', 
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error', 
+                    icon: 'error', 
+                    title: data.error, 
+                    })
+                }
+              // End Message   
+            } 
+        });
+   }
+</script>
+     {{-- /// End Add To Cart  // --}}
