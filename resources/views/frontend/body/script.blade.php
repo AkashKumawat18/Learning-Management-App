@@ -121,3 +121,14 @@
     /// End WishList Remove // 
  </script>
   {{-- /// End Load Wishlist Data // --}}
+
+
+
+
+    {{-- /// Start Add To Cart  // --}}
+    <script type="text/javascript">
+        function addToCart(courseId, courseName, instructorId, slug){
+         
+        }
+     </script>
+          {{-- /// End Add To Cart  // --}}
