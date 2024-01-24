@@ -14,6 +14,7 @@
 
     <!-- Favicon -->
     <link rel="icon" sizes="16x16" href="{{asset('frontend/images/favicon.png')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- inject:css -->
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
@@ -109,5 +110,7 @@
 	 }
 	 @endif 
 	</script>
+
+@include('frontend.body.script')
 </body>
 </html>
