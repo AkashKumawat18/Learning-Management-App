@@ -123,11 +123,15 @@ Route::controller(CourseController::class)->group(function(){
 }); 
 
 
+///End instructor group middleware
+
+
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 Route::get('/course/details/{id}/{slug}', [IndexController::class, 'CourseDetails']);
+Route::get('/category/{id}/{slug}', [IndexController::class, 'CategoryCourse']);
 
-///End instructor group middleware
+
 
 
 
