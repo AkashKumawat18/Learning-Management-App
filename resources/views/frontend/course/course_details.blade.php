@@ -78,12 +78,9 @@
                    <div class="course-overview-card bg-gray p-4 rounded">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">What you'll learn?</h3>
                        <ul class="generic-list-item overview-list-item">
-                           <li><i class="la la-check mr-1 text-black"></i> Learn the core Java skills needed to apply for Java developer positions in just 14 hours.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Be able to demonstrate your understanding of Java to future employers.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Acquire essential java basics for transitioning to the Spring Framework, Java EE, Android development and more.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Be able to sit for and pass the Oracle Java Certificate exam if you choose.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Learn industry "best practices" in Java software development from a professional Java developer who has worked in the language for 18 years.</li>
-                           <li><i class="la la-check mr-1 text-black"></i> Obtain proficiency in Java 8 and Java 11.</li>
+                        @foreach ($goals as $goal) 
+                        <li><i class="la la-check mr-1 text-black"></i>  {{ $goal->goal_name }} </li>
+                                             @endforeach  
                        </ul>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card bg-gray p-4 rounded">
@@ -92,195 +89,85 @@
                    <div class="course-overview-card">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Requirements</h3>
                        <ul class="generic-list-item generic-list-item-bullet fs-15">
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                           <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+                        <li> {{ $course->prerequisites }} </li>
                        </ul>
                    </div><!-- end course-overview-card -->
                     <div class="course-overview-card border border-gray p-4 rounded">
                        <h3 class="fs-20 font-weight-semi-bold">Top companies trust Aduca</h3>
                        <p class="fs-15 pb-1">Get your team access to Aduca's top 5,000+ courses</p>
                         <div class="pb-3">
-                            <img width="85" class="mr-3" src="images/sponsor-img.png" alt="company logo">
-                            <img width="80" class="mr-3" src="images/sponsor-img2.png" alt="company logo">
-                            <img width="80" class="mr-3" src="images/sponsor-img3.png" alt="company logo">
-                            <img width="70" class="mr-3" src="images/sponsor-img4.png" alt="company logo">
+                            <img width="85" class="mr-3" src="{{ asset('frontend/images/sponsor-img.png') }}" alt="company logo">
+                            <img width="80" class="mr-3" src="{{ asset('frontend/images/sponsor-img2.png') }}" alt="company logo">
+                            <img width="80" class="mr-3" src="{{ asset('frontend/images/sponsor-img3.png') }}" alt="company logo">
+                            <img width="70" class="mr-3" src="{{ asset('frontend/images/sponsor-img4.png') }}" alt="company logo">
                         </div>
                         <a href="for-business.html" class="btn theme-btn theme-btn-sm">Try Aduca for Business</a>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Description</h3>
-                       <p class="fs-15 pb-2">Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                       <p class="fs-15 pb-2">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pb-1">- Lorem ipsum dolor sit amet, consectetur.</p>
-                       <p class="fs-15 pt-3 pb-2 lh-22"><strong class="font-weight-semi-bold text-black">Are you aiming to get your first Java Programming job but struggling to find out what skills employers want</strong> and which course will give you those skills?</p>
-                       <p class="fs-15 pb-2">This course is designed to give you the Java skills you need to get a job as a Java developer.  By the end of the course, you will understand Java extremely well and be able to build your own Java apps and be productive as a software developer.</p>
+                       <p class="fs-15 pb-2"> {!! $course->description !!} </p>
                        <div class="collapse" id="collapseMore">
-                           <p class="fs-15 pb-2">The core java material you need to learn java development is covered in the first seven sections (around 14 hours in total).  The Java Basics are covered in those sections. The rest of the course covers intermediate, advanced, and optional material you do not technically need to go through.</p>
-                           <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
-                           <ul class="generic-list-item generic-list-item-bullet fs-15">
-                               <li>Anyone who wants to become a computer programmer</li>
-                               <li>Anyone who wants to become a computer programmer</li>
-                               <li>Anyone who wants to become a computer programmer</li>
-                           </ul>
+                        <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
+                        <p class="fs-15 pb-2"> {{ $course->prerequisites }} </p>
                        </div>
                        <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMore" role="button" aria-expanded="false" aria-controls="collapseMore">
                            <span class="collapse-btn-hide">Show more<i class="la la-angle-down ml-1 fs-14"></i></span>
                            <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
                        </a>
                    </div><!-- end course-overview-card -->
+                   @php
+                   $lecture = App\Models\CourseLecture::where('course_id',$course->id)->get();
+               @endphp  
                    <div class="course-overview-card">
                        <div class="curriculum-header d-flex align-items-center justify-content-between pb-4">
                            <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
                            <div class="curriculum-duration fs-15">
-                               <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong> 17 lectures</span>
-                               <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> 02:35:47</span>
+                            <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong> {{ count($lecture) }} lectures</span>
+                            <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> {{ $course->duration }}</span>
                            </div>
                        </div>
+                       @php
+                       $section = App\Models\CourseSection::where('course_id',$course->id)->orderBy('id','asc')->get();
+                   @endphp
                        <div class="curriculum-content">
                            <div id="accordion" class="generic-accordion">
-                               <div class="card">
-                                   <div class="card-header" id="headingOne">
-                                       <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Course introduction
-                                           <span class="fs-15 text-gray font-weight-medium">6 lectures</span>
-                                       </button>
-                                   </div><!-- end card-header -->
-                                   <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <a href="#" class="d-flex align-items-center justify-content-between text-color" data-toggle="modal" data-target="#previewModal">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Introductory words
-                                                           <span class="ribbon ml-2 fs-13">Preview</span>
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </a>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Remaster in Progress
-                                                       </span>
-                                                       <span>03:09</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Video Quality
-                                                       </span>
-                                                       <span>01:16</span>
-                                                   </div>
-                                               </li>
-                                                <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Important Tip - Source Code
-                                                       </span>
-                                                       <span>02:07</span>
-                                                   </div>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div><!-- end collapse -->
-                               </div><!-- end card -->
-                               <div class="card">
-                                   <div class="card-header" id="headingTwo">
-                                       <button class="btn btn-link collapsed d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Software tools setup
-                                           <span class="fs-15 text-gray font-weight-medium">6 lectures</span>
-                                       </button>
-                                   </div>
-                                   <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Biggest Tip to Succeed as a Java Programmer
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-file mr-1"></i>
-                                                           ** IMPORTANT ** - Configuring IntelliJ IDEA
-                                                       </span>
-                                                       <span>00:16</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Video Quality
-                                                       </span>
-                                                       <span>01:16</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Important Tip - Source Code
-                                                       </span>
-                                                       <span>02:07</span>
-                                                   </div>
-                                               </li>
-                                               <li>
-                                                   <div class="d-flex align-items-center justify-content-between">
-                                                       <span>
-                                                           <i class="la la-code mr-1"></i>
-                                                           Interface
-                                                       </span>
-                                                       <span>1 question</span>
-                                                   </div>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div>
-                               </div><!-- end card -->
-                               <div class="card">
-                                   <div class="card-header" id="headingThree">
-                                       <button class="btn btn-link collapsed d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                           <i class="la la-plus"></i>
-                                           <i class="la la-minus"></i>
-                                           Conclusion
-                                           <span class="fs-15 text-gray font-weight-medium">1 lectures</span>
-                                       </button>
-                                   </div>
-                                   <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                       <div class="card-body">
-                                           <ul class="generic-list-item">
-                                               <li>
-                                                   <a href="#" class="d-flex align-items-center justify-content-between text-color" data-toggle="modal" data-target="#previewModal">
-                                                       <span>
-                                                           <i class="la la-play-circle mr-1"></i>
-                                                           Conclusion
-                                                           <span class="ribbon ml-2 fs-13">Watch</span>
-                                                       </span>
-                                                       <span>02:27</span>
-                                                   </a>
-                                               </li>
-                                           </ul>
-                                       </div><!-- end card-body -->
-                                   </div><!-- end collapse -->
-                               </div><!-- end card -->
+                            @foreach ($section as $sec)
+
+                            @php
+                                $lecture = App\Models\CourseLecture::where('section_id',$sec->id)->get();
+                            @endphp
+                    
+                        <div class="card">
+                                <div class="card-header" id="heading{{ $sec->id }}">
+                                    <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapse{{ $sec->id }}" aria-expanded="true" aria-controls="collapse{{ $sec->id }}">
+                                        <i class="la la-plus"></i>
+                                        <i class="la la-minus"></i>
+                                        {{ $sec->section_title }}
+                                        <span class="fs-15 text-gray font-weight-medium">
+                                            {{ count($lecture) }} lectures</span>
+                                    </button>
+                                </div><!-- end card-header -->
+                                <div id="collapse{{ $sec->id }}" class="collapse show" aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <ul class="generic-list-item">
+                                           @foreach ($lecture as $lect) 
+                                            <li>
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <span>
+                                                        <i class="la la-play-circle mr-1"></i>
+                                                       {{ $lect->lecture_title }}
+                                                    </span>
+                                                    <span>03:09</span>
+                                                </div>
+                                            </li>
+                                            @endforeach 
+                    
+                                        </ul>
+                                    </div><!-- end card-body -->
+                                </div><!-- end collapse -->
+                            </div><!-- end card -->
+                    
+                            @endforeach    
                            </div><!-- end generic-accordion -->
                        </div><!-- end curriculum-content -->
                    </div><!-- end course-overview-card -->
