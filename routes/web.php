@@ -84,12 +84,18 @@ Route::middleware(['auth','roles:admin'])->group(function () {
             Route::get('/delete/subcategory/{id}','DeleteSubCategory')->name('delete.subcategory');
         });
 
-                //Instructor all route
-                Route::controller(AdminController::class)->group(function(){
-                    Route::get('/all/instructor','AllInstructor')->name('all.instructor');
-                    
-                    Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
-                });
+        //Instructor all route
+        Route::controller(AdminController::class)->group(function(){
+            Route::get('/all/instructor','AllInstructor')->name('all.instructor');    
+            Route::post('/update/user/stauts','UpdateUserStatus')->name('update.user.stauts');
+        });
+
+        // Admin Courses All Route 
+        Route::controller(AdminController::class)->group(function(){
+           Route::get('/admin/all/course','AdminAllCourse')->name('admin.all.course');
+           Route::post('/update/course/stauts','UpdateCourseStatus')->name('update.course.stauts');
+           Route::get('/admin/course/details/{id}','AdminCourseDetails')->name('admin.course.details');
+        });        
 
 });
 
