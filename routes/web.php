@@ -114,7 +114,7 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 // Category All Route 
 Route::controller(SettingController::class)->group(function(){
     Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
-    Route::post('/update/smtp','SmtpUpdate')->name('update.smtp');
+    Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
 });
 
 
@@ -179,6 +179,7 @@ Route::get('/instructor/details/{id}', [IndexController::class, 'InstructorDetai
 Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'AddToWishList']);
 
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+Route::post('/buy/data/store/{id}', [CartController::class, 'BuyToCart']);
 Route::get('/cart/data/', [CartController::class, 'CartData']);
 // Get Data from Minicart 
 Route::get('/course/mini/cart/', [CartController::class, 'AddMiniCart']);
