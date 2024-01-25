@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('cash_delivery')->nullable();
+            $table->string('total_amount')->nullable();
+            $table->string('payment_type')->nullable();
+            $table->string('invoice_no')->nullable();
+            $table->string('order_date')->nullable();
+            $table->string('order_month')->nullable();
+            $table->string('order_year')->nullable();
+            $table->string('status')->nullable(); 
             $table->timestamps();
         });
     }
