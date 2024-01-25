@@ -121,8 +121,7 @@ Route::controller(SettingController::class)->group(function(){
 // Admin All Order Route 
 Route::controller(OrderController::class)->group(function(){
     Route::get('/admin/pending/order','AdminPendingOrder')->name('admin.pending.order'); 
-
-
+    Route::get('/admin/order/details/{id}','AdminOrderDetails')->name('admin.order.details');
 });
 
 
