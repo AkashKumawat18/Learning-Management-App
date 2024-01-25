@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,12 +118,21 @@ Route::controller(SettingController::class)->group(function(){
     Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
 });
 
+// Admin All Order Route 
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/admin/pending/order','AdminPendingOrder')->name('admin.pending.order'); 
+
+
+});
+
 
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->name('become.instructor');
 Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
+
+
 
 
 
@@ -179,7 +189,7 @@ Route::get('/instructor/details/{id}', [IndexController::class, 'InstructorDetai
 Route::post('/add-to-wishlist/{course_id}', [WishListController::class, 'AddToWishList']);
 
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
-Route::post('/buy/data/store/{id}', [CartController::class, 'BuyToCart']);
+Route::post('/buy/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/cart/data/', [CartController::class, 'CartData']);
 // Get Data from Minicart 
 Route::get('/course/mini/cart/', [CartController::class, 'AddMiniCart']);
