@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,12 @@ Route::controller(WishListController::class)->group(function(){
   Route::controller(OrderController::class)->group(function(){
     Route::get('/my/course','MyCourse')->name('my.course'); 
     Route::get('/course/view/{course_id}','CourseView')->name('course.view');
+});
+
+ // User Question All Route 
+ Route::controller(QuestionController::class)->group(function(){
+    Route::post('/user/question','UserQuestion')->name('user.question');  
+
 });
 
 });
