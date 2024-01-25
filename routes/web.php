@@ -174,6 +174,15 @@ Route::controller(CourseController::class)->group(function(){
     Route::get('/delete/lecture/{id}','DeleteLecture')->name('delete.lecture');
     Route::post('/delete/section/{id}','DeleteSection')->name('delete.section');
 });
+
+
+// Admin All Order Route 
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/instructor/all/order','InstructorAllOrder')->name('instructor.all.order'); 
+
+});
+
+
 }); 
 
 

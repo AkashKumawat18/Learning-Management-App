@@ -39,20 +39,17 @@
             <ul>
                 <li> <a href="{{route('all.course')}}"><i class='bx bx-radio-circle'></i>All Course</a>
                 </li>
-                <li> <a href="ecommerce-products-details.html"><i class='bx bx-radio-circle'></i>Product Details</a>
-                </li>
+               
             </ul>
         </li>
         <li>
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
                 </div>
-                <div class="menu-title">Components</div>
+                <div class="menu-title">All Orders</div>
             </a>
             <ul>
-                <li> <a href="component-alerts.html"><i class='bx bx-radio-circle'></i>Alerts</a>
-                </li>
-                <li> <a href="component-accordions.html"><i class='bx bx-radio-circle'></i>Accordions</a>
+                <li> <a href="{{ route('instructor.all.order') }}"><i class='bx bx-radio-circle'></i>All Orders</a>
                 </li>
                
             </ul>
