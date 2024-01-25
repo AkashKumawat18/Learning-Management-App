@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Frontend\WishListController;
+use App\Http\Controllers\Backend\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,14 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
 
 });
+
+// Category All Route 
+Route::controller(SettingController::class)->group(function(){
+    Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
+
+
+});
+
 
 });
 
