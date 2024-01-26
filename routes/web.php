@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ActiveUserController;
+use App\Http\Controllers\Backend\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -158,6 +159,12 @@ Route::controller(ReviewController::class)->group(function(){
 Route::controller(ActiveUserController::class)->group(function(){
     Route::get('/all/user','AllUser')->name('all.user'); 
     Route::get('/all/instructor','AllInstructor')->name('all.instructor'); 
+
+});
+
+// Admin All user and Instructor All Route 
+Route::controller(BlogController::class)->group(function(){
+    Route::get('/blog/category','AllBlogCategory')->name('blog.category');  
 
 });
 

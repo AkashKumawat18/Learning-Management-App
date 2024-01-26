@@ -9,13 +9,13 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">All Instrutor</li>
+                    <li class="breadcrumb-item active" aria-current="page">All Blog Category</li>
                 </ol>
             </nav>
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-
+           <a href="{{ route('add.category') }}" class="btn btn-primary px-5">Add Blog Category </a>  
             </div>
         </div>
     </div>
@@ -28,32 +28,22 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>User Image </th>
-                            <th>Name</th> 
-                            <th>Email</th> 
-                            <th>Phone</th> 
-                            <th>Status</th>
+                            <th>Category Name </th>
+                            <th>Category Slug</th> 
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach ($users as $key=> $item) 
+                        @foreach ($category as $key=> $item) 
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td> <img src="{{ (!empty($item->photo)) ? url('upload/instructor_images/'.$item->photo) : url('upload/no_image.jpg')}}" alt="" style="width: 70px; height:40px;"> </td>
-                            <td>{{ $item->name }}</td> 
-                            <td>{{ $item->email }}</td> 
-                            <td>{{ $item->phone }}</td> 
+                            <td> {{ $item->category_name }}  </td>
+                            <td>{{ $item->category_slug }}</td> 
                             <td>
-                                @if ($item->UserOnline())
-                                <span class="badge badge-pill bg-success">Active Now</span>
-                                @else 
-                                <span class="badge badge-pill bg-danger">{{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }} </span>  
-
-                                @endif    
-                                                    </td> 
-
-
+       <a href="{{ route('edit.category',$item->id) }}" class="btn btn-info px-5">Edit </a>   
+       <a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger px-5" id="delete">Delete </a>                    
+                            </td>
                         </tr>
                         @endforeach
 
