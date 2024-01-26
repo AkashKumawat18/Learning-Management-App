@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\ReviewController;
+use App\Http\Controllers\Backend\ActiveUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -151,6 +152,12 @@ Route::controller(ReviewController::class)->group(function(){
     Route::get('/admin/pending/review','AdminPendingReview')->name('admin.pending.review'); 
     Route::post('/update/review/stauts','UpdateReviewStatus')->name('update.review.stauts'); 
     Route::get('/admin/active/review','AdminActiveReview')->name('admin.active.review');
+
+});
+// Admin All user and Instructor All Route 
+Route::controller(ActiveUserController::class)->group(function(){
+    Route::get('/all/user','AllUser')->name('all.user'); 
+    Route::get('/all/instructor','AllInstructor')->name('all.instructor'); 
 
 });
 
