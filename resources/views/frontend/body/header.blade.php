@@ -1,3 +1,7 @@
+@php
+    $setting = App\Models\SiteSetting::find(1);
+@endphp
+
 <header class="header-menu-area bg-white">
     <div class="header-top pr-150px pl-150px border-bottom border-bottom-gray py-1">
         <div class="container-fluid">
@@ -5,8 +9,8 @@
                 <div class="col-lg-6">
                     <div class="header-widget">
                         <ul class="generic-list-item d-flex flex-wrap align-items-center fs-14">
-                            <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-phone mr-1"></i><a href="tel:00123456789"> (00) 123 456 789</a></li>
-                            <li class="d-flex align-items-center"><i class="la la-envelope-o mr-1"></i><a href="mailto:contact@aduca.com"> contact@aduca.com</a></li>
+                            <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-phone mr-1"></i><a href="tel:00123456789"> {{ $setting->phone }}</a></li>
+                            <li class="d-flex align-items-center"><i class="la la-envelope-o mr-1"></i><a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></li>
                         </ul>
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
@@ -33,16 +37,16 @@
                             </button>
                         </div>
                         <ul class="generic-list-item d-flex flex-wrap align-items-center fs-14 border-left border-left-gray pl-3 ml-3">
-                            @auth
+    
+     @auth
     <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('dashboard') }}"> Dashboard</a></li>
     <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('user.logout') }}"> Logout</a></li>
-
     @else 
-
     <li class="d-flex align-items-center pr-3 mr-3 border-right border-right-gray"><i class="la la-sign-in mr-1"></i><a href="{{ route('login') }}"> Login</a></li>
     <li class="d-flex align-items-center"><i class="la la-user mr-1"></i><a href="{{ route('register') }}"> Register</a></li>
-
+        
     @endauth
+   
                         </ul>
                     </div><!-- end header-widget -->
                 </div><!-- end col-lg-6 -->
@@ -56,7 +60,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-2">
                         <div class="logo-box">
-                            <a href="{{ url('/') }}" class="logo"><img src="{{ asset('frontend/images/logo.png')}}" alt="logo"></a>
+                            <a href="{{ url('/') }}" class="logo"><img src="{{ asset($setting->logo)}}" alt="logo"></a>
                             <div class="user-btn-action">
                                 <div class="search-menu-toggle icon-element icon-element-sm shadow-sm mr-2" data-toggle="tooltip" data-placement="top" title="Search">
                                     <i class="la la-search"></i>
@@ -70,10 +74,9 @@
                             </div>
                         </div>
                     </div><!-- end col-lg-2 -->
-                    @php
+@php
     $categories = App\Models\Category::orderBy('category_name','ASC')->get();
 @endphp
-
 <div class="col-lg-10">
     <div class="menu-wrapper">
         <div class="menu-category">
@@ -81,7 +84,7 @@
                 <li>
                     <a href="#">Categories <i class="la la-angle-down fs-12"></i></a>
                     <ul class="cat-dropdown-menu">
-
+                       
                         @foreach ($categories as $cat)
         @php
         $subcategories = App\Models\SubCategory::where('category_id',$cat->id)->get();    
@@ -90,12 +93,12 @@
                             <a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}<i class="la la-angle-right"></i></a>
                             <ul class="sub-menu">
                                 @foreach ($subcategories as $subcat)
-                                <li><a href="{{ url('subcategory/'.$subcat->id.'/'.$subcat->subcategory_slug) }}">{{ $subcat->subcategory_name }}</a></li>
+                                <li><a href="{{ url('subcategory/'.$subcat->id.'/'.$subcat->subcategory_slug) }}">{{ $subcat->subcategory_name }}</a></li> 
                                 @endforeach
                             </ul>
                         </li> 
                         @endforeach
-
+                        
                     </ul>
                 </li>
             </ul>
@@ -110,20 +113,20 @@
             <ul>
                 <li>
                     <a href="{{ url('/') }}">Home  </a>
-
+                    
                 </li>
                 <li>
                     <a href="#">courses <i class="la la-angle-down fs-12"></i></a>
                     <ul class="dropdown-menu-item">
                         <li><a href="course-grid.html">course grid</a></li>
                         <li><a href="course-list.html">course list</a></li>
-
+                        
                     </ul>
                 </li>
-
+                
                 <li>
-                    <a href="{{ route('blog') }}">blog </a>
-
+                    <a href="{{ route('blog') }}">blog  </a>
+                    
                 </li>
             </ul><!-- end ul -->
         </nav><!-- end main-menu -->
@@ -135,12 +138,14 @@
                         <span class="product-count" id="cartQty">0</span>
                     </p>
                     <ul class="cart-dropdown-menu">
+                        
                         <div id="miniCart">
-
                         </div>
+                       <br><br>
+                       
                         <li class="media media-card">
                             <div class="media-body fs-16">
-                                <p class="text-black font-weight-semi-bold lh-18">Total: <span class="cart-total">$12.99</span> <span class="before-price fs-14">$129.99</span></p>
+                                <p class="text-black font-weight-semi-bold lh-18">Total: $<span class="cart-total" id="cartSubTotal"> </span>  </p>
                             </div>
                         </li>
                         <li>
