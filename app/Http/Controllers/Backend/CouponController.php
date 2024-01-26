@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Coupon;
-use App\Models\SubCategory;
 use Carbon\Carbon;
+use App\Models\Coupon;
+use App\Models\Course;
+use App\Models\SubCategory;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+
 
 class CouponController extends Controller
 {
@@ -71,7 +74,7 @@ class CouponController extends Controller
     }/// End Method 
 
     public function AdminDeleteCoupon($id){
-
+ 
         Coupon::find($id)->delete();
 
         $notification = array(
@@ -82,8 +85,23 @@ class CouponController extends Controller
 
     }/// End Method 
 
+    ///////////////////// Instructor All Coupon Method 
+
+    public function InstructorAllCoupon(){
+        $id = Auth::user()->id;
+        $coupon = Coupon::where('instructor_id',$id)->latest()->get();
+        return view('instructor.coupon.coupon_all',compact('coupon'));
+
+    }/// End Method 
 
 
+
+    public function InstructorAddCoupon(){
+        $id = Auth::user()->id;
+        $courses = Course::where('instructor_id',$id)->get();
+        return view('instructor.coupon.coupon_add',compact('courses'));
+
+    }// End Method 
 
 
 
