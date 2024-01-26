@@ -165,7 +165,10 @@ Route::controller(ActiveUserController::class)->group(function(){
 // Admin All user and Instructor All Route 
 Route::controller(BlogController::class)->group(function(){
     Route::get('/blog/category','AllBlogCategory')->name('blog.category'); 
-    Route::post('/blog/category/store','StoreBlogCategory')->name('blog.category.store');  
+    Route::post('/blog/category/store','StoreBlogCategory')->name('blog.category.store'); 
+    Route::get('/edit/blog/category/{id}','EditBlogCategory');
+    Route::post('/blog/category/update','UpdateBlogCategory')->name('blog.category.update'); 
+    Route::get('/delete/blog/category/{id}','DeleteBlogCategory')->name('delete.blog.category');  
 
 });
 
