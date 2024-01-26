@@ -1,7 +1,5 @@
 @extends('frontend.master')
 @section('home')
-
-
 <!-- ================================
     START BREADCRUMB AREA
 ================================= -->
@@ -19,10 +17,12 @@
                     <p class="section__desc pt-2 lh-30">{{ $course->course_title }}</p>
                 </div><!-- end section-heading -->
                 <div class="d-flex flex-wrap align-items-center pt-3">
+                   
                     @if ($course->bestseller == 1)
                     <h6 class="ribbon ribbon-lg mr-2 bg-3 text-white">Bestseller</h6>
                     @else
                     @endif 
+                    
                     <div class="rating-wrap d-flex flex-wrap align-items-center">
                         <div class="review-stars">
                             <span class="rating-number">4.4</span>
@@ -66,7 +66,6 @@
 <!-- ================================
     END BREADCRUMB AREA
 ================================= -->
-
 <!--======================================
         START COURSE DETAILS AREA
 ======================================-->
@@ -79,8 +78,9 @@
                        <h3 class="fs-24 font-weight-semi-bold pb-3">What you'll learn?</h3>
                        <ul class="generic-list-item overview-list-item">
                         @foreach ($goals as $goal) 
-                        <li><i class="la la-check mr-1 text-black"></i>  {{ $goal->goal_name }} </li>
-                                             @endforeach  
+   <li><i class="la la-check mr-1 text-black"></i>  {{ $goal->goal_name }} </li>
+                        @endforeach  
+                           
                        </ul>
                    </div><!-- end course-overview-card -->
                    <div class="course-overview-card bg-gray p-4 rounded">
@@ -89,7 +89,8 @@
                    <div class="course-overview-card">
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Requirements</h3>
                        <ul class="generic-list-item generic-list-item-bullet fs-15">
-                        <li> {{ $course->prerequisites }} </li>
+                           <li> {{ $course->prerequisites }} </li>
+                           
                        </ul>
                    </div><!-- end course-overview-card -->
                     <div class="course-overview-card border border-gray p-4 rounded">
@@ -107,103 +108,107 @@
                        <h3 class="fs-24 font-weight-semi-bold pb-3">Description</h3>
                        <p class="fs-15 pb-2"> {!! $course->description !!} </p>
                        <div class="collapse" id="collapseMore">
+                          
                         <h4 class="fs-20 font-weight-semi-bold py-2">Who this course is for:</h4>
                         <p class="fs-15 pb-2"> {{ $course->prerequisites }} </p>
+                          
+                            
                        </div>
                        <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMore" role="button" aria-expanded="false" aria-controls="collapseMore">
                            <span class="collapse-btn-hide">Show more<i class="la la-angle-down ml-1 fs-14"></i></span>
                            <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
                        </a>
                    </div><!-- end course-overview-card -->
-                   @php
-                   $lecture = App\Models\CourseLecture::where('course_id',$course->id)->get();
-               @endphp  
+    @php
+        $lecture = App\Models\CourseLecture::where('course_id',$course->id)->get();
+    @endphp               
                    <div class="course-overview-card">
                        <div class="curriculum-header d-flex align-items-center justify-content-between pb-4">
                            <h3 class="fs-24 font-weight-semi-bold">Course content</h3>
                            <div class="curriculum-duration fs-15">
-                            <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong> {{ count($lecture) }} lectures</span>
-                            <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> {{ $course->duration }}</span>
+                               <span class="curriculum-total__text mr-2"><strong class="text-black font-weight-semi-bold">Total:</strong> {{ count($lecture) }} lectures</span>
+                               <span class="curriculum-total__hours"><strong class="text-black font-weight-semi-bold">Total hours:</strong> {{ $course->duration }}</span>
                            </div>
                        </div>
-                       @php
-                       $section = App\Models\CourseSection::where('course_id',$course->id)->orderBy('id','asc')->get();
-                   @endphp
+    @php
+        $section = App\Models\CourseSection::where('course_id',$course->id)->orderBy('id','asc')->get();
+    @endphp
                        <div class="curriculum-content">
                            <div id="accordion" class="generic-accordion">
-                            @foreach ($section as $sec)
-
-                            @php
-                                $lecture = App\Models\CourseLecture::where('section_id',$sec->id)->get();
-                            @endphp
-                    
-                        <div class="card">
-                                <div class="card-header" id="heading{{ $sec->id }}">
-                                    <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapse{{ $sec->id }}" aria-expanded="true" aria-controls="collapse{{ $sec->id }}">
-                                        <i class="la la-plus"></i>
-                                        <i class="la la-minus"></i>
-                                        {{ $sec->section_title }}
-                                        <span class="fs-15 text-gray font-weight-medium">
-                                            {{ count($lecture) }} lectures</span>
-                                    </button>
-                                </div><!-- end card-header -->
-                                <div id="collapse{{ $sec->id }}" class="collapse " aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <ul class="generic-list-item">
-                                           @foreach ($lecture as $lect) 
-                                            <li>
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <span>
-                                                        <i class="la la-play-circle mr-1"></i>
-                                                       {{ $lect->lecture_title }}
-                                                    </span>
-                                                    <span>03:09</span>
-                                                </div>
-                                            </li>
-                                            @endforeach 
-                    
-                                        </ul>
-                                    </div><!-- end card-body -->
-                                </div><!-- end collapse -->
-                            </div><!-- end card -->
-                    
-                            @endforeach    
+                               
+        @foreach ($section as $sec)
+        @php
+            $lecture = App\Models\CourseLecture::where('section_id',$sec->id)->get();
+        @endphp
+                       
+    <div class="card">
+            <div class="card-header" id="heading{{ $sec->id }}">
+                <button class="btn btn-link d-flex align-items-center justify-content-between" data-toggle="collapse" data-target="#collapse{{ $sec->id }}" aria-expanded="true" aria-controls="collapse{{ $sec->id }}">
+                    <i class="la la-plus"></i>
+                    <i class="la la-minus"></i>
+                    {{ $sec->section_title }}
+                    <span class="fs-15 text-gray font-weight-medium">
+                        {{ count($lecture) }} lectures</span>
+                </button>
+            </div><!-- end card-header -->
+            <div id="collapse{{ $sec->id }}" class="collapse " aria-labelledby="heading{{ $sec->id }}" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="generic-list-item">
+                       @foreach ($lecture as $lect) 
+                        <li>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span>
+                                    <i class="la la-play-circle mr-1"></i>
+                                   {{ $lect->lecture_title }}
+                                </span>
+                                <span>03:09</span>
+                            </div>
+                        </li>
+                        @endforeach 
+                    </ul>
+                </div><!-- end card-body -->
+            </div><!-- end collapse -->
+        </div><!-- end card -->
+     
+        @endforeach    
+                               
                            </div><!-- end generic-accordion -->
                        </div><!-- end curriculum-content -->
                    </div><!-- end course-overview-card -->
-                   <div class="course-overview-card pt-4">
-                    <h3 class="fs-24 font-weight-semi-bold pb-4">About the instructor</h3>
-                    <div class="instructor-wrap">
-                        <div class="media media-card">
-                            <div class="instructor-img">
-                                <a href="teacher-detail.html" class="media-img d-block">
-                                    <img class="lazy" src="{{ (!empty($course->user->photo)) ? url('upload/instructor_images/'.$course->user->photo) : url('upload/no_image.jpg')}}" data-src="images/small-avatar-1.jpg" alt="Avatar image">
-                                </a>
-                                <ul class="generic-list-item pt-3">
-                                    <li><i class="la la-star mr-2 text-color-3"></i> 4.6 Instructor Rating</li>
-                                    <li><i class="la la-user mr-2 text-color-3"></i> 45,786 Students</li>
-                                    <li><i class="la la-comment-o mr-2 text-color-3"></i> 2,533 Reviews</li>
-                                    <li><i class="la la-play-circle-o mr-2 text-color-3"></i> {{ count($instructorCourses) }} Courses</li>
-                                    <li><a href="teacher-detail.html">View all Courses</a></li>
-                                </ul>
-                            </div><!-- end instructor-img -->
-                            <div class="media-body">
-                                <h5><a href="teacher-detail.html">{{ $course['user']['name'] }}</a></h5>
-                                <span class="d-block lh-18 pt-2 pb-3">Joined {{ Carbon\Carbon::parse($course->user->created_at)->diffForHumans()  }}</span>
-                                <p class="text-black lh-18 pb-3">{{ $course['user']['email'] }}</p>
-                                <p class="pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                                <div class="collapse" id="collapseMoreTwo">
-                                    <p class="pb-3">After learning the hard way, Tim was determined to become the best teacher he could, and to make his training as painless as possible, so that you, or anyone else with the desire to become a software developer, could become one.</p>
-                                    <p class="pb-3">If you want to become a financial analyst, a finance manager, an FP&A analyst, an investment banker, a business executive, an entrepreneur, a business intelligence analyst, a data analyst, or a data scientist, <strong class="text-black font-weight-semi-bold">Tim Buchalka's courses are the perfect course to start</strong>.</p>
-                                </div>
-                                <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMoreTwo" role="button" aria-expanded="false" aria-controls="collapseMoreTwo">
-                                    <span class="collapse-btn-hide">Show more<i class="la la-angle-down ml-1 fs-14"></i></span>
-                                    <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div><!-- end instructor-wrap -->
-                </div><!-- end course-overview-card -->
+             
+    <div class="course-overview-card pt-4">
+        <h3 class="fs-24 font-weight-semi-bold pb-4">About the instructor</h3>
+        <div class="instructor-wrap">
+            <div class="media media-card">
+                <div class="instructor-img">
+                    <a href="teacher-detail.html" class="media-img d-block">
+                        <img class="lazy" src="{{ (!empty($course->user->photo)) ? url('upload/instructor_images/'.$course->user->photo) : url('upload/no_image.jpg')}}" data-src="images/small-avatar-1.jpg" alt="Avatar image">
+                    </a>
+                    <ul class="generic-list-item pt-3">
+                        <li><i class="la la-star mr-2 text-color-3"></i> 4.6 Instructor Rating</li>
+                        <li><i class="la la-user mr-2 text-color-3"></i> 45,786 Students</li>
+                        <li><i class="la la-comment-o mr-2 text-color-3"></i> 2,533 Reviews</li>
+                        <li><i class="la la-play-circle-o mr-2 text-color-3"></i> {{ count($instructorCourses) }} Courses</li>
+                        <li><a href="teacher-detail.html">View all Courses</a></li>
+                    </ul>
+                </div><!-- end instructor-img -->
+                <div class="media-body">
+                    <h5><a href="teacher-detail.html">{{ $course['user']['name'] }}</a></h5>
+                    <span class="d-block lh-18 pt-2 pb-3">Joined {{ Carbon\Carbon::parse($course->user->created_at)->diffForHumans()  }}</span>
+                    <p class="text-black lh-18 pb-3">{{ $course['user']['email'] }}</p>
+                    <p class="pb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <div class="collapse" id="collapseMoreTwo">
+                        <p class="pb-3">After learning the hard way, Tim was determined to become the best teacher he could, and to make his training as painless as possible, so that you, or anyone else with the desire to become a software developer, could become one.</p>
+                        <p class="pb-3">If you want to become a financial analyst, a finance manager, an FP&A analyst, an investment banker, a business executive, an entrepreneur, a business intelligence analyst, a data analyst, or a data scientist, <strong class="text-black font-weight-semi-bold">Tim Buchalka's courses are the perfect course to start</strong>.</p>
+                    </div>
+                    <a class="collapse-btn collapse--btn fs-15" data-toggle="collapse" href="#collapseMoreTwo" role="button" aria-expanded="false" aria-controls="collapseMoreTwo">
+                        <span class="collapse-btn-hide">Show more<i class="la la-angle-down ml-1 fs-14"></i></span>
+                        <span class="collapse-btn-show">Show less<i class="la la-angle-up ml-1 fs-14"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div><!-- end instructor-wrap -->
+    </div><!-- end course-overview-card -->
                    <div class="course-overview-card pt-4">
                        <h3 class="fs-24 font-weight-semi-bold pb-40px">Student feedback</h3>
                        <div class="feedback-wrap">
@@ -457,42 +462,56 @@
                                     </div>
                                 </a>
                             </div><!-- end preview-course-video -->
-                            @php
-                            $amount = $course->selling_price - $course->discount_price;
-                            $discount = ($amount/$course->selling_price) * 100;
-                           @endphp   
+                          
+    @php
+    $amount = $course->selling_price - $course->discount_price;
+    $discount = ($amount/$course->selling_price) * 100;
+   @endphp            
+                          
                             <div class="preview-course-feature-content pt-40px">
-                                <p class="d-flex align-items-center pb-2">
-                                    @if ($course->discount_price == NULL)
-                                    <span class="fs-35 font-weight-semi-bold text-black">${{ $course->selling_price }}</span>
-                                    @else
-                                    <span class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }}</span>
-                                    <span class="before-price mx-1">${{ $course->selling_price }}</span>
-                                    @endif
-                        
-                        
-                                    <span class="price-discount">{{ round($discount) }}% off</span>
-                                </p>
+        
+         <p class="d-flex align-items-center pb-2">
+            @if ($course->discount_price == NULL)
+            <span class="fs-35 font-weight-semi-bold text-black">${{ $course->selling_price }}</span>
+            @else
+            <span class="fs-35 font-weight-semi-bold text-black">${{ $course->discount_price }}</span>
+            <span class="before-price mx-1">${{ $course->selling_price }}</span>
+            @endif
+            
+            
+            <span class="price-discount">{{ round($discount) }}% off</span>
+        </p>
                                 <p class="preview-price-discount-text pb-35px">
                                     <span class="text-color-3">4 days</span> left at this price!
                                 </p>
-                                <div class="buy-course-btn-box">
-                                    <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" ><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
-                                
-                                    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2" onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
-                                    
+<div class="buy-course-btn-box">
+    <button type="submit" class="btn theme-btn w-100 mb-2" onclick="addToCart({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )" ><i class="la la-shopping-cart fs-18 mr-1"></i> Add to cart</button>
+
+    <button type="button" class="btn theme-btn w-100 theme-btn-white mb-2"  onclick="buyCourse({{ $course->id }}, '{{ $course->course_name }}', '{{ $course->instructor_id }}', '{{ $course->course_name_slug }}' )"><i class="la la-shopping-bag mr-1"></i> Buy this course</button>
+
+    <div class="input-group mb-2" id="couponField">
+        <input class="form-control form--control pl-3" type="text"  id="coupon_name" placeholder="Coupon code">
+        <div class="input-group-append">
+            <input type="hidden" id="course_id" name="course_id" value="{{ $course->id }}">
+            <input type="hidden" id="instrutor_id" name="instrutor_id" value="{{ $course->instructor_id }}">
+      <a type="submit" onclick="applyInsCoupon()" class="btn theme-btn">Apply Code</a>      
+        </div>
+    </div>  
+
+
+</div>
                                 <p class="fs-14 text-center pb-4">30-Day Money-Back Guarantee</p>
                                 <div class="preview-course-incentives">
                                     <h3 class="card-title fs-18 pb-2">This course includes</h3>
-                                    <ul class="generic-list-item pb-3">
-                                        <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ $course->duration }} hours on-demand video</li>
-                                        <li><i class="la la-file mr-2 text-color"></i>{{ $course->resources }} articles</li>
-                                        <li><i class="la la-file-text mr-2 text-color"></i>12 downloadable resources</li>
-                                        <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
-                                        <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
-                                        <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV</li>
-                                        <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion</li>
-                                    </ul>
+            <ul class="generic-list-item pb-3">
+                <li><i class="la la-play-circle-o mr-2 text-color"></i>{{ $course->duration }} hours on-demand video</li>
+                <li><i class="la la-file mr-2 text-color"></i>{{ $course->resources }} articles</li>
+                <li><i class="la la-file-text mr-2 text-color"></i>12 downloadable resources</li>
+                <li><i class="la la-code mr-2 text-color"></i>51 coding exercises</li>
+                <li><i class="la la-key mr-2 text-color"></i>Full lifetime access</li>
+                <li><i class="la la-television mr-2 text-color"></i>Access on mobile and TV</li>
+                <li><i class="la la-certificate mr-2 text-color"></i>Certificate of Completion</li>
+            </ul>
                                     <div class="section-block"></div>
                                     <div class="buy-for-team-container pt-4">
                                         <h3 class="fs-18 font-weight-semi-bold pb-2">Training 5 or more people?</h3>
@@ -507,17 +526,17 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Course Features</h3>
                             <div class="divider"><span></span></div>
-                            <ul class="generic-list-item generic-list-item-flash">
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-clock mr-2 text-color"></i>Duration</span> {{ $course->duration }} hours</li>
-                        
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-file-text-o mr-2 text-color"></i>Resources</span> {{ $course->resources }}</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-bolt mr-2 text-color"></i>Quizzes</span> 26</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-eye mr-2 text-color"></i>Preview Lessons</span> 4</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-language mr-2 text-color"></i>Language</span> English</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-lightbulb mr-2 text-color"></i>Skill level</span> {{ $course->label }}</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-users mr-2 text-color"></i>Students</span> 30,506</li>
-                                <li class="d-flex align-items-center justify-content-between"><span><i class="la la-certificate mr-2 text-color"></i>Certificate</span> {{ $course->certificate }}</li>
-                            </ul>
+    <ul class="generic-list-item generic-list-item-flash">
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-clock mr-2 text-color"></i>Duration</span> {{ $course->duration }} hours</li>
+        
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-file-text-o mr-2 text-color"></i>Resources</span> {{ $course->resources }}</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-bolt mr-2 text-color"></i>Quizzes</span> 26</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-eye mr-2 text-color"></i>Preview Lessons</span> 4</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-language mr-2 text-color"></i>Language</span> English</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-lightbulb mr-2 text-color"></i>Skill level</span> {{ $course->label }}</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-users mr-2 text-color"></i>Students</span> 30,506</li>
+        <li class="d-flex align-items-center justify-content-between"><span><i class="la la-certificate mr-2 text-color"></i>Certificate</span> {{ $course->certificate }}</li>
+    </ul>
                         </div>
                     </div><!-- end card -->
                     <div class="card card-item">
@@ -525,9 +544,10 @@
                             <h3 class="card-title fs-18 pb-2">Course Categories</h3>
                             <div class="divider"><span></span></div>
                             <ul class="generic-list-item">
-                                @foreach ($categories as $cat)
-                                <li><a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a></li>
+                               @foreach ($categories as $cat)
+                                <li><a href="{{ url('category/'.$cat->id.'/'.$cat->category_slug) }}">{{ $cat->category_name }}</a></li> 
                                @endforeach 
+                                
                             </ul>
                         </div>
                     </div><!-- end card -->
@@ -535,33 +555,33 @@
                         <div class="card-body">
                             <h3 class="card-title fs-18 pb-2">Related Courses</h3>
                             <div class="divider"><span></span></div>
-                            @foreach ($relatedCourses as $related)
-                            <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
-                                <a href="course-details.html" class="media-img">
-                                    <img class="mr-3 lazy" src="{{ asset($related->course_image) }}" data-src="{{ asset($related->course_image) }}" alt="Related course image">
-                                </a>
-                                <div class="media-body">
-                                    <h5 class="fs-15"><a href="course-details.html"> {{ $related->course_name}}</a></h5>
-                                    <span class="d-block lh-18 py-1 fs-14">{{ $related['user']['name'] }}</span>
-                    
-                                    @if ($related->discount_price == NULL)
-                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->selling_price }}  </p>
-                                    @else
-                                    <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->discount_price }} <span class="before-price fs-14">${{ $related->selling_price }}</span></p>
-                                    @endif
-                    
-                                </div>
-                            </div><!-- end media -->
-                    
-                    
-                            @endforeach
+                            
+        @foreach ($relatedCourses as $related)
+        <div class="media media-card border-bottom border-bottom-gray pb-4 mb-4">
+            <a href="course-details.html" class="media-img">
+                <img class="mr-3 lazy" src="{{ asset($related->course_image) }}" data-src="{{ asset($related->course_image) }}" alt="Related course image">
+            </a>
+            <div class="media-body">
+                <h5 class="fs-15"><a href="course-details.html"> {{ $related->course_name}}</a></h5>
+                <span class="d-block lh-18 py-1 fs-14">{{ $related['user']['name'] }}</span>
+                @if ($related->discount_price == NULL)
+                <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->selling_price }}  </p>
+                @else
+                <p class="text-black font-weight-semi-bold lh-18 fs-15">${{ $related->discount_price }} <span class="before-price fs-14">${{ $related->selling_price }}</span></p>
+                @endif
+               
+            </div>
+        </div><!-- end media -->
+        
+            
+        @endforeach
+                         
                             <div class="view-all-course-btn-box">
                                 <a href="course-grid.html" class="btn theme-btn w-100">View All Courses <i class="la la-arrow-right icon ml-1"></i></a>
                             </div>
                         </div>
                     </div><!-- end card -->
-
-                    
+                  
                 </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
         </div><!-- end row -->
@@ -570,7 +590,6 @@
 <!--======================================
         END COURSE DETAILS AREA
 ======================================-->
-
 <!--======================================
         START RELATED COURSE AREA
 ======================================-->
@@ -579,8 +598,8 @@
         <div class="related-course-wrap">
             <h3 class="fs-28 font-weight-semi-bold pb-35px">More Courses by <a href="teacher-detail.html" class="text-color hover-underline">{{ $course['user']['name'] }}</a></h3>
             <div class="view-more-carousel-2 owl-action-styled">
+                
                 @foreach ($instructorCourses  as $inscourse)
-
                 @php
                 $amount = $inscourse->selling_price - $inscourse->discount_price;
                 $discount = ($amount/$inscourse->selling_price) * 100;
@@ -591,18 +610,15 @@
                             <img class="card-img-top" src="{{ asset($inscourse->course_image) }}" alt="Card image cap">
                         </a>
                         <div class="course-badge-labels">
-
                             @if ($inscourse->bestseller == 1)
                             <div class="course-badge">Bestseller</div>
                             @else
                             @endif
-
                             @if ($inscourse->discount_price == NULL)
                             <div class="course-badge blue">New</div>
                             @else
                             <div class="course-badge blue">{{ round($discount) }}%</div>
                             @endif
-
                         </div>
                     </div><!-- end card-image -->
                     <div class="card-body">
@@ -621,18 +637,17 @@
                             <span class="rating-total pl-1">(20,230)</span>
                         </div><!-- end rating-wrap -->
                         <div class="d-flex justify-content-between align-items-center">
-                         
-                            @if ($inscourse->discount_price == NULL)
-                            <p class="card-price text-black font-weight-bold">${{ $inscourse->selling_price }}  </p>
-                            @else
-                            <p class="card-price text-black font-weight-bold">${{ $inscourse->discount_price }} <span class="before-price font-weight-medium">${{ $inscourse->selling_price }}</span></p> 
-                            @endif
+                    @if ($inscourse->discount_price == NULL)
+                    <p class="card-price text-black font-weight-bold">${{ $inscourse->selling_price }}  </p>
+                    @else
+                    <p class="card-price text-black font-weight-bold">${{ $inscourse->discount_price }} <span class="before-price font-weight-medium">${{ $inscourse->selling_price }}</span></p> 
+                    @endif
                             <div class="icon-element icon-element-sm shadow-sm cursor-pointer" title="Add to Wishlist"><i class="la la-heart-o"></i></div>
                         </div>
                     </div><!-- end card-body -->
-                </div><!-- end card -->
-            </div><!-- end card --> 
-            @endforeach
+                </div><!-- end card --> 
+                @endforeach
+            
             </div><!-- end view-more-carousel -->
         </div><!-- end related-course-wrap -->
     </div><!-- end container -->
@@ -640,7 +655,6 @@
 <!--======================================
         END RELATED COURSE AREA
 ======================================-->
-
 <!--======================================
         START CTA AREA
 ======================================-->
@@ -673,12 +687,6 @@
 <!--======================================
         END CTA AREA
 ======================================-->
-
-
-
-
-
-
 <!-- Modal -->
 <div class="modal fade modal-container" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -710,7 +718,6 @@
         </div><!-- end modal-content-->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
-
 <!-- Modal -->
 <div class="modal fade modal-container" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -728,12 +735,12 @@
                 <video controls crossorigin playsinline poster="{{ asset($course->course_image) }}" id="player">
                     <!-- Video files -->
                     <source src="{{ asset($course->video) }}" type="video/mp4"/>
+                      
                 </video>
             </div><!-- end modal-body -->
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
-
 <!-- Modal -->
 <div class="modal fade modal-container" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -780,6 +787,4 @@
         </div><!-- end modal-content -->
     </div><!-- end modal-dialog -->
 </div><!-- end modal -->
-
-
 @endsection
