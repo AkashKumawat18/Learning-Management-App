@@ -5,16 +5,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Frontend\IndexController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Backend\SettingController;
-use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\QuestionController;
-use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Controllers\Frontend\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,9 +136,14 @@ Route::controller(OrderController::class)->group(function(){
     Route::get('/pending-confrim/{id}','PendingToConfirm')->name('pending-confrim');
     Route::get('/admin/confirm/order','AdminConfirmOrder')->name('admin.confirm.order');
 });
-
+// Admin Report All Route 
+Route::controller(ReportController::class)->group(function(){
+    Route::get('/report/view','ReportView')->name('report.view'); 
 
 });
+
+
+});// End Admin Group Middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->name('become.instructor');
