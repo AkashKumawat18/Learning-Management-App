@@ -229,6 +229,12 @@ Route::controller(CouponController::class)->group(function(){
     Route::get('/instructor/delete/coupon/{id}','InstructorDeleteCoupon')->name('instructor.delete.coupon');
 });
 
+// Instructor Review All Route 
+Route::controller(ReviewController::class)->group(function(){
+    Route::get('/instructor/all/review','InstructorAllReview')->name('instructor.all.review');  
+
+});
+
 
 }); 
 
