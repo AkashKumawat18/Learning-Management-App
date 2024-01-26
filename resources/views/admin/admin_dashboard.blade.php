@@ -9,6 +9,10 @@
 	<link rel="icon" href="{{asset('/backend/assets/images/favicon-32x32.png')}}" type="image/png"/>
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<!--tagsinput-->
+	<link href="{{ asset('backend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+<!--tagsinput-->
 	<!--plugins-->
 	<link href="{{asset('/backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
 	<link href="{{asset('/backend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
@@ -73,6 +77,10 @@
     <script src=" {{asset('/backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 	<script src=" {{asset('/backend/assets/plugins/chartjs/js/chart.js')}}"></script>
 	<script src=" {{asset('/backend/assets/js/index.js')}}"></script>
+
+	<!--tagsinput-->
+	<script src="{{ asset('backend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+	<!--tagsinput-->
 	<!--app JS-->
 	<script src=" {{asset('/backend/assets/js/app.js')}}"></script>
 	<script src=" {{asset('/backend/assets/js/validate.min.js')}}"></script>
@@ -119,6 +127,14 @@
 		break; 
 	 }
 	 @endif 
+	</script>
+	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+	   tinymce.init({
+		 selector: 'textarea#myeditorinstance', // Replace this CSS selector to match the placeholder element for TinyMCE
+		 plugins: 'powerpaste advcode table lists checklist',
+		 toolbar: 'undo redo | blocks| bold italic | bullist numlist checklist | code | table'
+	   });
 	</script>
 </body>
 
