@@ -9,6 +9,9 @@ use App\Models\Payment;
 use App\Models\Category;
 use App\Mail\Orderconfirm;
 use App\Models\Course_goal;
+use App\Models\User;
+use App\Notifications\OrderComplete;
+use Illuminate\Support\Facades\Notification;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\CourseLecture;
@@ -254,6 +257,7 @@ public function CheckoutCreate(){
 
 public function Payment(Request $request){
 
+    $user = User::where('role','instructor')->get();
     if (Session::has('coupon')) {
        $total_amount = Session::get('coupon')['total_amount'];
     }else {
@@ -329,10 +333,14 @@ if ($request->cash_delivery == 'stripe') {
             'email' => $sendmail->email,
        ];
 
-       Mail::to($request->email)->send(new Orderconfirm($data));
+       Mail::to($request->email)->send(new Orderconfirm($data)); 
+           /// End Send email to student /// 
+
+           /// Send Notification 
+           Notification::send($user, new OrderComplete($request->name));
 
 
-       /// End Send email to student /// 
+      
 
        $notification = array(
         'message' => 'Cash Payment Submit Successfully',
