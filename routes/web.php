@@ -126,10 +126,17 @@ Route::middleware(['auth','roles:admin'])->group(function () {
 
 });
 
-// Category All Route 
+// SMPT All Route
 Route::controller(SettingController::class)->group(function(){
     Route::get('/smtp/setting','SmtpSetting')->name('smtp.setting');
     Route::post('/update/smtp','SmtpSetting')->name('update.smtp');
+});
+
+// Site Setting All Route 
+Route::controller(SettingController::class)->group(function(){
+    Route::get('/site/setting','SiteSetting')->name('site.setting'); 
+
+
 });
 
 // Admin All Order Route 

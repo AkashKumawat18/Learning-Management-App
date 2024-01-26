@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\SiteSetting;
 use App\Models\SmtpSetting;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
 class SettingController extends Controller
@@ -37,7 +38,12 @@ class SettingController extends Controller
 
     }// End Method 
 
+    public function SiteSetting(){
 
+        $site = SiteSetting::find(1);
+        return view('admin.backend.site.site_update',compact('site'));
+
+    }// End Method 
 
 
 
