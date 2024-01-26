@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BlogPost;
+use Intervention\Image\Facades\Image;
 
 class BlogController extends Controller
 {
@@ -66,4 +68,11 @@ class BlogController extends Controller
     
     
        }// End Method 
+
+       //////////// All Blog Post Method .//
+
+   public function BlogPost(){
+    $post = BlogPost::latest()->get();
+    return view('admin.backend.post.all_post',compact('post'));
+   }// End Method 
 }
