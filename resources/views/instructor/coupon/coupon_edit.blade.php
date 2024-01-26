@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Instructor Add Coupon </li>
+                    <li class="breadcrumb-item active" aria-current="page">Instructor Edit Coupon </li>
                 </ol>
             </nav>
         </div>
@@ -20,18 +20,20 @@
 
     <div class="card">
         <div class="card-body p-4">
-            <h5 class="mb-4">Add Coupon</h5>
-            <form id="myForm" action="{{ route('instructor.store.coupon') }}" method="post" class="row g-3" enctype="multipart/form-data">
+            <h5 class="mb-4">Edit Coupon</h5>
+            <form id="myForm" action="{{ route('instructor.update.coupon') }}" method="post" class="row g-3" enctype="multipart/form-data">
                 @csrf
+
+                <input type="hidden" name="coupon_id" value="{{ $coupon->id }}" >
 
                 <div class="form-group col-md-6">
                     <label for="input1" class="form-label">Coupon Name</label>
-                    <input type="text" name="coupon_name" class="form-control" id="input1"  >
+                    <input type="text" name="coupon_name" class="form-control" id="input1" value="{{ $coupon->coupon_name }}" >
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="input2" class="form-label">Coupon Discount </label>
-                    <input class="form-control" name="coupon_discount" type="text"  >
+                    <input class="form-control" name="coupon_discount" type="text" value="{{ $coupon->coupon_discount }}" >
                 </div>
 
                 <div class="form-group col-md-6">
@@ -39,7 +41,7 @@
                     <select name="course_id" class="form-select mb-3" aria-label="Default select example">
                         <option selected="">Open this select menu</option>
                        @foreach ($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->course_name }}</option>
+                        <option value="{{ $course->id }}" {{ $course->id == $coupon->course_id ? 'selected' : '' }} >{{ $course->course_name }}</option>
 
                         @endforeach
 
@@ -48,7 +50,7 @@
 
                 <div class="form-group col-md-6">
                     <label for="input2" class="form-label">Coupon Validity Date </label>
-                    <input class="form-control" name="coupon_validity" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" >
+                    <input class="form-control" name="coupon_validity" type="date" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" value="{{ $coupon->coupon_validity }}"  >
                 </div>
 
 
