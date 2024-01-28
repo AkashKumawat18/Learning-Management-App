@@ -1,9 +1,12 @@
 <?php
 namespace App\Http\Controllers\Backend;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Exports\PermissionExport;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Permission;
+
 class RoleController extends Controller
 {
     public function AllPermission(){
@@ -75,4 +78,10 @@ class RoleController extends Controller
         return view('admin.backend.pages.permission.import_permission');
 
     }// End Method 
+
+    public function Export(){
+
+        return Excel::download(new PermissionExport, 'permission.xlsx');
+
+    }// End Method
 }
