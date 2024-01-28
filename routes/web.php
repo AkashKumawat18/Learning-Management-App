@@ -5,20 +5,21 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\QuestionController;
 use App\Http\Controllers\Frontend\WishListController;
-use App\Http\Controllers\Backend\ReviewController;
 use App\Http\Controllers\Backend\ActiveUserController;
-use App\Http\Controllers\Backend\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -189,7 +190,15 @@ Route::controller(BlogController::class)->group(function(){
     
 });
 
-
+// Permission All Route 
+Route::controller(RoleController::class)->group(function(){
+    Route::get('/all/permission','AllPermission')->name('all.permission'); 
+    Route::get('/add/permission','AddPermission')->name('add.permission');
+    Route::post('/store/permission','StorePermission')->name('store.permission'); 
+    Route::get('/edit/permission/{id}','EditPermission')->name('edit.permission');
+    Route::post('/update/permission','UpdatePermission')->name('update.permission');
+    Route::get('/delete/permission/{id}','DeletePermission')->name('delete.permission');
+});
 });// End Admin Group Middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
