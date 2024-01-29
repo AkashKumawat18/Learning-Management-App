@@ -202,6 +202,13 @@ Route::controller(RoleController::class)->group(function(){
     Route::get('/export','Export')->name('export');
     Route::post('/import','Import')->name('import');
 });
+// Role All Route 
+Route::controller(RoleController::class)->group(function(){
+    Route::get('/all/roles','AllRoles')->name('all.roles');
+    Route::get('/add/roles','AddRoles')->name('add.roles'); 
+    Route::post('/store/roles','StoreRoles')->name('store.roles'); 
+
+});
 });// End Admin Group Middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
