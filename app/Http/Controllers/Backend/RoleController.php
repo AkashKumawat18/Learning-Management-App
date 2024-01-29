@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\PermissionExport;
 use App\Imports\PermissionImport;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -177,6 +178,28 @@ class RoleController extends Controller
         $permission_groups = User::getpermissionGroups();
 
         return view('admin.backend.pages.rolesetup.add_roles_permission',compact('roles','permission_groups','permissions'));
+
+    }// End Method 
+
+    public function RolePermissionStore(Request $request){
+
+        $data = array();
+        $permissions = $request->permission;
+
+        foreach ($permissions as $key => $item) {
+            $data['role_id'] = $request->role_id;
+            $data['permission_id'] = $item;
+
+            DB::table('role_has_permissions')->insert($data);
+        } // end foreach
+
+
+        $notification = array(
+            'message' => 'Role Permission Added Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.roles')->with($notification); 
+
 
     }// End Method 
 }

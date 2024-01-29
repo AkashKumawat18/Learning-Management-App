@@ -211,6 +211,7 @@ Route::controller(RoleController::class)->group(function(){
     Route::post('/update/roles','UpdateRoles')->name('update.roles');
     Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles');  
     Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission');
+    Route::post('/role/permission/store','RolePermissionStore')->name('role.permission.store');
 
 });
 });// End Admin Group Middleware
