@@ -72,4 +72,6 @@ class User extends Authenticatable
         }
 
     }// End Method 
+
+    
 }
